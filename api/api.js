@@ -1,5 +1,5 @@
 import axios from 'axios'
-const host = 'http://lzf-allen.top'
+const host = '/client'
 
 // 搜索结果
 const search = (params) => {

@@ -5,7 +5,6 @@ const Func = require('./func')
 const Rule = require('./rule')
 const Auth = require('./auth')
 const logger = require('koa-logger')
-const countNum = require('./countNum')
 
 module.exports = app => {
 

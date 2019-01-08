@@ -15,7 +15,7 @@ const mkdirSync = dirname => {
 }
 
 module.exports = {
-    uploadFile(ctx, opts){
+    uploadFile(ctx, opts) {
         //重命名
         function rename(fileName) {
             return Math.random().toString(16).substr(2) + '.' + fileName.split('.').pop()
@@ -30,6 +30,7 @@ module.exports = {
             filename: 文件名
         */
         return new Promise((resolve, reject) => {
+            const host = 'lzf-allen.top'
             var fileObj = {}
             busboy.on('file', async (fieldname, file, filename, encoding, mimetype) => {
                 let filePath = '',
@@ -37,11 +38,10 @@ module.exports = {
 
                 if (fieldname === 'markdown_img') {
                     filePath = path.join(opts.path, mimetype.split('/')[0] + 's/markdown')
-                    console.log(ctx.host)
-                    imgPrefix = `${ctx.protocol}://${ctx.host}/${mimetype.split('/')[0]}s/markdown`
+                    imgPrefix = `${ctx.protocol}://${host}/${mimetype.split('/')[0]}s/markdown`
                 } else {
                     filePath = path.join(opts.path, mimetype.split('/')[0] + 's')
-                    imgPrefix = `${ctx.protocol}://${ctx.host}/${mimetype.split('/')[0]}s`
+                    imgPrefix = `${ctx.protocol}://${host}/${mimetype.split('/')[0]}s`
                 }
 
 
@@ -69,6 +69,28 @@ module.exports = {
             })
 
             ctx.req.pipe(busboy)
+        })
+    },
+    deleteFile(pathImg) {
+        return new Promise((resolve, reject) => {
+            try {
+                if (fs.existsSync(pathImg)) {
+                    fs.unlinkSync(pathImg, function (err) {
+                        if (err) reject(err);
+                        resolve({
+                            code: 1,
+                            msg: 'success'
+                        })
+                    });
+                } else {
+                    resolve({
+                        code: 0,
+                        msg: '文件不存在'
+                    })
+                }
+            } catch (error) {
+                reject(error)
+            }
         })
     }
 }

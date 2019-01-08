@@ -23,7 +23,7 @@ module.exports = {
   mongodb: {
     username: 'lzf',
     pwd: '090623',
-    address: '106.15.206.236:27017',
+    address: '127.0.0.1:27017',
     db: 'blog',
     authSource: 'blog'
   }

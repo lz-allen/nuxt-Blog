@@ -3,7 +3,7 @@
     <dt>{{list.name}}<i v-if="list.power === 'admin'">博主</i></dt>
     <p>{{list.time | formatTime(true)}}</p>
     <dd>{{list.content}}</dd>
-    <img :src="list.image ? list.image : 'http://lzf-allen.top/images/user/commentImg.jpg'" alt="评论头像">
+    <img :src="list.image ? list.image : 'http://127.0.0.1/images/user/commentImg.jpg'" alt="评论头像">
     <span @click="reply(list._id)">回复</span>
     <div v-if="hasChild">
       <comment-tree v-for="item in list.children" :key="item._id" :list="item"></comment-tree>

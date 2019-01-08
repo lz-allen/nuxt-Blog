@@ -32,23 +32,23 @@ module.exports = {
         try {
             let data = await ctx.findPage(articleModel, {
                 $or: [{
-                        title: {
-                            $regex: reg
-                        },
+                    title: {
+                        $regex: reg
                     },
-                    {
-                        desc: {
-                            $regex: reg
-                        }
+                },
+                {
+                    desc: {
+                        $regex: reg
                     }
+                }
                 ]
             }, {
-                markdown: 0,
-                comment: 0,
-            }, {
-                limit: pageSize * 1,
-                skip: (currentPage - 1) * pageSize
-            })
+                    markdown: 0,
+                    comment: 0,
+                }, {
+                    limit: pageSize * 1,
+                    skip: (currentPage - 1) * pageSize
+                })
             ctx.send(data)
         } catch (err) {
             ctx.sendError(err)
@@ -76,12 +76,21 @@ module.exports = {
             ctx.sendError(err)
         }
     },
-    async markdown_upload_img (ctx, next) {
-        console.log('----------------添加图片 markdown_upload_img-----------------------');
+    async markdown_upload_img(ctx, next) {
         let opts = {
             path: path.resolve(__dirname, '../../public')
         }
         let result = await ctx.uploadFile(ctx, opts)
         ctx.send(result)
+    },
+    async markdown_delete_img(ctx, next) {
+        let { filename } = ctx.request.body
+        let pathImg = path.resolve(__dirname, `../../public/images/markdown/${filename}`)
+        try {
+            let result = await ctx.deleteFile(pathImg)
+            ctx.send(result)
+        } catch (err) {
+            ctx.sendError(err)
+        }
     }
 }

@@ -16,8 +16,10 @@ module.exports = app => {
   router.get('/admin_demo_api/article/listData', app.admin.article.getListData)
   router.post('/admin_demo_api/article/delete', app.admin.article.articleDelete)
   router.post('/admin_demo_api/article/edit', app.admin.article.articleEdit)
-  // 图片上传
+
+  // 图片上传和删除
   router.post('/admin_demo_api/markdown_upload_img', app.admin.article.markdown_upload_img)
+  router.post('/admin_demo_api/markdown_delete_img', app.admin.article.markdown_delete_img)
 
   // client 
   router.get('/client_demo_api/article/listData', app.client.article.listData)

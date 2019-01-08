@@ -33,6 +33,8 @@ module.exports = {
   async articleInfo(ctx, next) {
     let id = ctx.request.query.id
     try {
+      let res = await ctx.update(articleModel, { _id: id }, { $inc: { total: 1 } })
+      console.log(res)
       let data = await ctx.findOne(articleModel, { _id: id })
       ctx.send(data)
     } catch (error) {
