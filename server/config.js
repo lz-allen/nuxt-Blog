@@ -21,9 +21,9 @@ module.exports = {
   auth,
   log,
   mongodb: {
-    username: 'lzf',
-    pwd: '090623',
-    address: '127.0.0.1:27017',
+    username: 'admin',
+    pwd: 'admin',
+    address: '113.31.147.73:27017',
     db: 'blog',
     authSource: 'blog'
   }
